@@ -857,7 +857,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		    page: '.tab-page',
 		    warning: '.warning:first',
 		    comment: '.comment:first',
-			templateid: {$template},
+		    templateid: {$template},
 		    init: function () {
 		        var _self = this;
 		        // исправляем шаблон D3X
@@ -1178,7 +1178,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        });
 		    },
 		    setDefaultTemplate: function () {
-				var _self = this;
+		        var _self = this;
 		        var confirmTxt = 'Вы действительно хотите сбросить шаблон по умолчанию ?';
 		        if (confirm(confirmTxt)) {
 		            j.ajax({
