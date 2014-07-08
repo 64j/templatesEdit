@@ -1164,9 +1164,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		            cache: false,
 		            url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
 		            data: {
-		                templateid: {
-		                    $template
-		                },
+		                templateid: {$template},
 		                data: _self.htmlentities(stringArr)
 		            },
 		            success: function (data) {
@@ -1186,9 +1184,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		                cache: false,
 		                url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
 		                data: {
-		                    templateid: {
-		                        $template
-		                    },
+		                    templateid: {$template},
 		                    reset: 'yes'
 		                },
 		                success: function (data) {
