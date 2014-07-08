@@ -20,7 +20,9 @@ templatesEdit
 Если в документе с шаблоном blank нажать &quot;Сбросить шаблон по умолчанию&quot;, то расположение вернётся в первозданному виду.</p>
 <p>Если настроили вид шаблона <strong>blank</strong>, и лень во всех шаблонах делать одно и тоже, можно на странице модуля нажать <strong>Установить шаблоны по шаблону blank</strong> и тогда все шаблоны <span style="color: #F00">перезапишутся</span> по маске шаблона <strong>blank</strong>.</p>
 <br>
-<img src="http://wexar.ru/assets/images/templatesedit_image_docs_1.png" alt="" width="914" height="305">
+<img src="http://wexar.ru/assets/images/templatesedit_image_docs_1.png" alt="" width="250">
+<img src="http://wexar.ru/assets/images/templatesedit_image_docs_2.png" alt="" width="250">
+<img src="http://wexar.ru/assets/images/templatesedit_image_docs_3.png" alt="" width="250">
 <br>
 <h3>Установка модуля и плагина</h3>
 <p>Устанавливаете модуль с кодом</p>
