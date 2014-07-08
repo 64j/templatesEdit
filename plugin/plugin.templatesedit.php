@@ -857,6 +857,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		    page: '.tab-page',
 		    warning: '.warning:first',
 		    comment: '.comment:first',
+			templateid: {$template},
 		    init: function () {
 		        var _self = this;
 		        // исправляем шаблон D3X
@@ -1164,7 +1165,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		            cache: false,
 		            url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
 		            data: {
-		                templateid: {$template},
+		                templateid: _self.templateid,
 		                data: _self.htmlentities(stringArr)
 		            },
 		            success: function (data) {
@@ -1177,6 +1178,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        });
 		    },
 		    setDefaultTemplate: function () {
+				var _self = this;
 		        var confirmTxt = 'Вы действительно хотите сбросить шаблон по умолчанию ?';
 		        if (confirm(confirmTxt)) {
 		            j.ajax({
@@ -1184,7 +1186,7 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		                cache: false,
 		                url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
 		                data: {
-		                    templateid: {$template},
+		                    templateid: _self.templateid,
 		                    reset: 'yes'
 		                },
 		                success: function (data) {
