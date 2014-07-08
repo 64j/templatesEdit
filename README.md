@@ -35,9 +35,7 @@ templatesEdit
 */<br>
 include_once(MODX_BASE_PATH.'assets/modules/templatesEdit/module.templatesedit.php');</pre>
 <p>&nbsp;</p>
-<p>Устанавливаете плагин <strong>templatesEdit </strong>, <br>
-	События <strong>OnDocFormTemplateRender</strong>, <strong>OnTVFormDelete</strong>, <strong>OnTVFormSave</strong>, <strong>OnTempFormDelete</strong>, <strong>OnTempFormSave<br>
-	</strong>Настройки плагина <strong>&editableTemplate=Редактировать шаблоны;list;true,false;true &altRenderTemplate=Альтернативный вывод шаблона (div);list;true,false;false</strong></p>
+<p>Устанавливаете плагин <strong>templatesEdit </strong><br></p>
 <pre style="font: 100 13px/16px monospace; margin: 10px; padding: 10px; background: #fff;color: #000080;word-wrap: break-word;border: 1px solid #C5C5C5;">
 //&lt;?php
 /* templatesEdit
