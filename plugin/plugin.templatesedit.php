@@ -846,9 +846,8 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		<!------ templatesEdit ------->
 		<script type="text/javascript" src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 		<script type="text/javascript">
-		if(!window.jQuery) alert("jQuery  не подключен. \\nДля включения библиотеки jQuery, в настройках плагина templatesEdit установите Load JQuery - true");
+		if (!window.jQuery) alert("jQuery  не подключен. \\nДля включения библиотеки jQuery, в настройках плагина templatesEdit установите Load JQuery - true");
 		var j = jQuery.noConflict(true);
-		
 		var tplEdit = {
 		    pitems: '.pane-items',
 		    pitem: '.pane-item',
@@ -868,13 +867,13 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        /////////////////////////////////
 		        j(_self.pitem).append(_self.boxItemEdit);
 		        j(_self.tab + '[data-visibility=hidden]').addClass('tab-hidden');
-				j(_self.page).each(function(i, el){
-					j(_self.tab).eq(i).attr('data-tabindex', '#' + j(el).attr('id'));
-				});
+		        j(_self.page).each(function (i, el) {
+		            j(_self.tab).eq(i).attr('data-tabindex', '#' + j(el).attr('id'));
+		        });
 		        j(_self.tab).append(_self.boxTabEdit);
-				j(_self.page).wrapAll('<div class="tab-pages">');
-		        j('.pane-item-title .warning, .pane-item-title .comment, .pane-item-helparea, .tab-row h2.tab span:not('+_self.tab+'[data-tabindex=#tabMeta] span,'+_self.tab+'[data-tabindex=#tabAccess] span)').attr('contenteditable', true);
-				j(_self.tab+'[data-tabindex=#tabMeta] .tab-edit-box,'+_self.tab+'[data-tabindex=#tabAccess] .tab-edit-box').css('visibility','hidden');
+		        j(_self.page).wrapAll('<div class="tab-pages">');
+		        j('.pane-item-title .warning, .pane-item-title .comment, .pane-item-helparea, .tab-row h2.tab span:not(' + _self.tab + '[data-tabindex=#tabMeta] span,' + _self.tab + '[data-tabindex=#tabAccess] span)').attr('contenteditable', true);
+		        j(_self.tab + '[data-tabindex=#tabMeta] .tab-edit-box,' + _self.tab + '[data-tabindex=#tabAccess] .tab-edit-box').css('visibility', 'hidden');
 		        j('#actions .actionButtons li').remove();
 		        j('#actions .actionButtons').append('<li id="Button1"><a href="#" class="primary"><img alt="icons_save" src="media/style/{$theme}/images/icons/save.png"> Сохранить шаблон</a></li><li id="Button2"><a href="#" onclick="location.reload();"><img src="media/style/{$theme}/images/icons/refresh.png"> Обновить страницу</a></li><li id="Button3"><a href="#"><img src="media/style/{$theme}/images/icons/information.png"> Сбросить шаблон по умолчанию</a></li>');
 		        j('#Button1 a').click(function () {
@@ -886,7 +885,9 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        _self.sortItems();
 		        _self.sortTabs();
 		        _self.dropTabs();
-				j(_self.tab+'[data-tabindex=#tabMeta],'+_self.tab+'[data-tabindex=#tabAccess]').droppable({ disabled: true});
+		        j(_self.tab + '[data-tabindex=#tabMeta],' + _self.tab + '[data-tabindex=#tabAccess]').droppable({
+		            disabled: true
+		        });
 		        _self.tabEdit();
 		        _self.itemHover();
 		    },
@@ -903,11 +904,11 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		            j(_self.page).hide();
 		            j(_id).show();
 		            j(_self.tab).removeClass('selected').css({
-						zIndex: 1
-					});
+		                zIndex: 1
+		            });
 		            j(this).addClass('selected').css({
-						zIndex: 999
-					});
+		                zIndex: 999
+		            });
 		        });
 		        j('.tab-item-drag').click(function () {
 		            return false;
@@ -970,21 +971,20 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        j(_self.pitem).find('.pane-item-box-edit div').unbind();
 		        j(_self.pitem).hover(function () {
 		            j('.pane-item-helparea', this).text(j('img#item-help-' + j(this).data('item-name'), this).attr('alt'));
-					if(j(this).index()==0) {
-						j(this).closest(_self.page).css({
-							zIndex: 1000
-						})
-					} else {
-						j(this).closest(_self.page).css({
-							zIndex: 2
-						})
-					}
-		        },
-				function() {
-					j(this).closest(_self.page).css({
-							zIndex: 2
-					})
-				});
+		            if (j(this).index() == 0) {
+		                j(this).closest(_self.page).css({
+		                    zIndex: 1000
+		                })
+		            } else {
+		                j(this).closest(_self.page).css({
+		                    zIndex: 2
+		                })
+		            }
+		        }, function () {
+		            j(this).closest(_self.page).css({
+		                zIndex: 2
+		            })
+		        });
 		        j('.pane-item-visibility').click(function () {
 		            var _item = j(this).closest(_self.pitem);
 		            if (_item.hasClass('pane-item-hidden')) {
@@ -1057,8 +1057,8 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		            delay: 100,
 		            opacity: 0.7,
 		            handle: 'div.tab-item-drag',
-					items: 'h2:not([data-tabindex=#tabMeta], [data-tabindex=#tabAccess])',
-//		            revert: true,
+		            items: 'h2:not([data-tabindex=#tabMeta], [data-tabindex=#tabAccess])',
+		            //		            revert: true,
 		            tolerance: 'pointer',
 		            cancel: 'span',
 		            update: function (event, ui) {
@@ -1066,14 +1066,14 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		                j('h2', this).each(function (i, el) {
 		                    var id = j(el).data('tabindex');
 		                    if (j(el).hasClass('selected')) {
-								j(el).css({
-									zIndex: 999
-								});
+		                        j(el).css({
+		                            zIndex: 999
+		                        });
 		                        tmp_id = id;
 		                    } else {
-								j(el).css({
-									zIndex: 1
-								});
+		                        j(el).css({
+		                            zIndex: 1
+		                        });
 		                        var tmp = j(id).clone();
 		                        if (tmp_id) {
 		                            j(id + ':first').remove();
@@ -1128,35 +1128,35 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		        var tsArr = {};
 		        j(_self.tab).each(function (i, h) {
 		            var grpID = j(h).data('tabindex').replace('#tab', '');
-					if(grpID == 'Access' || grpID == 'Meta') {
-						return
-					} else {
-						tsArr[grpID] = {};
-						tsArr[grpID]['fields'] = {};
-						tsArr[grpID]['title'] = _self.cleanText(j(h).text());
-						tsArr[grpID]['roles'] = '';
-						tsArr[grpID]['hide'] = j('#tab' + grpID).hasClass('pane-page-hidden') ? '1' : '0';
-						j(_self.pitem, j('#tab' + grpID)).each(function () {
-							var field_type = this.hasClass('pane-item-field') ? 'field' : 'tv';
-							var item_id = j(this).data('item-name');
-							var title = j(_self.warning, this).text();
-							if (j(_self.warning, this).text() != '') {
-								if (j(_self.comment, this).text() != '') {
-									title = title + '||||' + j(_self.comment, this).text();
-								}
-							} else {
-								title = '';
-							}
-							var help = j('#item-help-' + item_id, this).length ? _self.cleanText(j('#item-help-' + item_id, this).attr('alt')) : '';
-							tsArr[grpID]['fields'][item_id] = {};
-							tsArr[grpID]['fields'][item_id][field_type] = {};
-							tsArr[grpID]['fields'][item_id][field_type]['title'] = _self.cleanText(title);
-							tsArr[grpID]['fields'][item_id][field_type]['help'] = help;
-							tsArr[grpID]['fields'][item_id][field_type]['name'] = item_id;
-							tsArr[grpID]['fields'][item_id][field_type]['roles'] = '';
-							tsArr[grpID]['fields'][item_id][field_type]['hide'] = this.hasClass('pane-item-hidden') ? '1' : '0';
-						})
-					}
+		            if (grpID == 'Access' || grpID == 'Meta') {
+		                return
+		            } else {
+		                tsArr[grpID] = {};
+		                tsArr[grpID]['fields'] = {};
+		                tsArr[grpID]['title'] = _self.cleanText(j(h).text());
+		                tsArr[grpID]['roles'] = '';
+		                tsArr[grpID]['hide'] = j('#tab' + grpID).hasClass('pane-page-hidden') ? '1' : '0';
+		                j(_self.pitem, j('#tab' + grpID)).each(function () {
+		                    var field_type = this.hasClass('pane-item-field') ? 'field' : 'tv';
+		                    var item_id = j(this).data('item-name');
+		                    var title = j(_self.warning, this).text();
+		                    if (j(_self.warning, this).text() != '') {
+		                        if (j(_self.comment, this).text() != '') {
+		                            title = title + '||||' + j(_self.comment, this).text();
+		                        }
+		                    } else {
+		                        title = '';
+		                    }
+		                    var help = j('#item-help-' + item_id, this).length ? _self.cleanText(j('#item-help-' + item_id, this).attr('alt')) : '';
+		                    tsArr[grpID]['fields'][item_id] = {};
+		                    tsArr[grpID]['fields'][item_id][field_type] = {};
+		                    tsArr[grpID]['fields'][item_id][field_type]['title'] = _self.cleanText(title);
+		                    tsArr[grpID]['fields'][item_id][field_type]['help'] = help;
+		                    tsArr[grpID]['fields'][item_id][field_type]['name'] = item_id;
+		                    tsArr[grpID]['fields'][item_id][field_type]['roles'] = '';
+		                    tsArr[grpID]['fields'][item_id][field_type]['hide'] = this.hasClass('pane-item-hidden') ? '1' : '0';
+		                })
+		            }
 		        });
 		        var stringArr = JSON.stringify(tsArr);
 		        j.ajax({
@@ -1164,38 +1164,42 @@ if ($e->name == 'OnDocFormTemplateRender') {
 		            cache: false,
 		            url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
 		            data: {
-		                templateid: {$template},
+		                templateid: {
+		                    $template
+		                },
 		                data: _self.htmlentities(stringArr)
 		            },
 		            success: function (data) {
 		                alert(data);
-						location.reload();
+		                location.reload();
 		            },
 		            error: function () {
 		                alert('Ошибка сохранения шаблона');
 		            }
 		        });
 		    },
-		    setDefaultTemplate: function() {
-				var confirmTxt = 'Вы действительно хотите сбросить шаблон по умолчанию ?';
-				if(confirm(confirmTxt)) {
-					j.ajax({
-						type: "POST",
-						cache: false,
-						url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
-						data: {
-							templateid: {$template},
-							reset: 'yes'
-						},
-						success: function (data) {
-							alert(data);
-							location.reload();
-						},
-						error: function () {
-							alert('Ошибка сброса шаблона');
-						}
-					});
-				}
+		    setDefaultTemplate: function () {
+		        var confirmTxt = 'Вы действительно хотите сбросить шаблон по умолчанию ?';
+		        if (confirm(confirmTxt)) {
+		            j.ajax({
+		                type: "POST",
+		                cache: false,
+		                url: window.location.protocol + '//' + window.location.host + '/' + 'assets/modules/templatesEdit/ajax-action.php',
+		                data: {
+		                    templateid: {
+		                        $template
+		                    },
+		                    reset: 'yes'
+		                },
+		                success: function (data) {
+		                    alert(data);
+		                    location.reload();
+		                },
+		                error: function () {
+		                    alert('Ошибка сброса шаблона');
+		                }
+		            });
+		        }
 		    }
 		}
 		j(function () {
