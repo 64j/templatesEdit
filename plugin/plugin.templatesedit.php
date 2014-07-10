@@ -669,7 +669,7 @@ if ($e->name == 'OnTVFormSave') {
     foreach ($rs as $v) {
         $check_tpl = $modx->db->getValue($modx->db->select("templateid", $modx->getFullTableName('site_tmplvar_templates'), "tmplvarid=" . $id . " AND templateid=" . $v['templateid']));
         $data      = json_decode($v['data'], true);
-        if (!$check_tpl['templateid']) {
+        if (!$check_tpl) {
             foreach ($data as $key => $val) {
                 unset($data[$key]['fields']['tv' . $id]);
             }
