@@ -682,8 +682,8 @@ if ($e->name == 'OnTVFormSave') {
             if (!$tplEdit->recursive_array_search($tv['name'], $data)) {
                 $tv_arr['tv' . $id]        = array(
                     'tv' => array(
-                        'title' => $tv['caption'],
-                        'help' => $tv['description'],
+                        'title' => $tv['caption'] . '||||' . $tv['description'],
+                        'help' => '',
                         'name' => $tv['name'],
                         'roles' => '',
                         'hide' => ''
