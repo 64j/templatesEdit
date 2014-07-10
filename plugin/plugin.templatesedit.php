@@ -682,7 +682,7 @@ if ($e->name == 'OnTVFormSave') {
             if (!$tplEdit->recursive_array_search('tv' . $id, $data) && $id > 0) {
                 $tv_arr['tv' . $id]        = array(
                     'tv' => array(
-                        'title' => $tv['caption'] . ($tv['description'] ? '||||'  .$tv['description'] : ''),
+                        'title' => $tv['caption'] . ($tv['description'] ? '||||' . $tv['description'] : ''),
                         'help' => '',
                         'name' => 'tv' . $id,
                         'roles' => '',
@@ -700,9 +700,9 @@ if ($e->name == 'OnTVFormSave') {
 }
 
 if ($e->name == 'OnTVFormDelete') {
-	require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
-	$tplEdit = new templatesEdit($modx);
-    $rs = $modx->db->makeArray($modx->db->select("data, templateid", $modx->getFullTableName('site_templates_settings')));
+    require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
+    $tplEdit = new templatesEdit($modx);
+    $rs      = $modx->db->makeArray($modx->db->select("data, templateid", $modx->getFullTableName('site_templates_settings')));
     foreach ($rs as $v) {
         $data = json_decode($v['data'], true);
         foreach ($data as $key => $val) {
