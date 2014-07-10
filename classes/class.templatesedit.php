@@ -29,7 +29,7 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $tv['title'] . $tv['description'] ? '||||'  .$tv['description'] : '',
+                        'title' => $v['title'] . '||||' . $v['description'],
                         'help' => '',
                         'name' => $v['name'],
                         'roles' => '',
@@ -58,7 +58,7 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $tv['title'] . $tv['description'] ? '||||'  .$tv['description'] : '',
+                        'title' => $v['title'] . '||||' . $v['description'],
                         'help' => '',
                         'name' => $v['name'],
                         'roles' => '',
@@ -89,7 +89,7 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $tv['title'] . $tv['description'] ? '||||'  .$tv['description'] : '',
+                        'title' => $v['title'] . '||||' . $v['description'],
                         'help' => '',
                         'name' => $v['name'],
                         'roles' => '',
