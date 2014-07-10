@@ -1,0 +1,8 @@
+.pane-item { clear: both; padding: 3px 0; border-bottom: 1px dotted #CCC; }
+.pane-item:last-child { border-bottom: none }
+.pane-item-title .warning, .pane-item .comment { display: block; padding: 0 3px; margin: 0 0 1px; }
+.pane-item:after, .tab-row:after { content: ""; display: block; clear: both; }
+.pane-item-title { float: left; width: 185px; }
+.pane-item-f { margin-left: 190px; }
+.pane-item-f.pane-item-w { margin-left: 0 }
+.pane-item.pane-item-split { border-bottom: 2px solid #555; }

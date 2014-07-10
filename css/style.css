@@ -1,7 +1,8 @@
 .tab-row h2 span { border: 1px solid transparent; cursor: text }
-.pane-item { position: relative; clear: both; z-index: 1!important; border-bottom: 1px dotted #CCC; background: #fff; padding: 5px 2px }
-.pane-item:hover { box-shadow: 0 2px 11px rgba(0,0,0,0.07); z-index: 9!important }
-.pane-item:hover, .pane-item.edit, .ui-sortable-helper, .pane-item-box-edit { background: #F1F1F1 }
+.pane-item { position: relative; clear: both; z-index: 1!important; border-bottom: 1px dotted #CCC; background: #fff; padding: 5px 2px; margin-left: 7px; }
+.pane-item:last-child { border-bottom: none }
+.pane-item:hover, .pane-split.ui-drop-hover { box-shadow: 0 2px 11px rgba(0,0,0,0.07); z-index: 9!important }
+.pane-item:hover, .pane-item.edit, .ui-sortable-helper, .pane-item-box-edit, .pane-split.ui-drop-hover .pane-item, .pane-split.ui-drop-hover { background: #F1F1F1 }
 .pane-item-title .warning, .pane-item .comment, .pane-item .pane-item-helparea { display: block; border-radius: 2px; border: 1px solid transparent; margin: 0 0 1px; padding: 0 3px }
 .pane-item:hover .warning, .pane-item:hover .comment, .pane-item:hover .pane-item-helparea, .tab-row h2 span:active { background: #fff; color: #111!important; text-shadow: none; border-color: #DFDFDF }
 .pane-item-title .warning:focus, .pane-item-title .comment:focus, .pane-item .pane-item-helparea:focus, .tab-row h2 span:focus { outline: none; box-shadow: 0 0 3px #0070FF; border: 1px solid #599BFF; background: #fff; color: #111!important; text-shadow: none }
@@ -12,15 +13,19 @@
 .pane-item .pane-item-helparea { position: absolute; left: 187px; top: 0; right: 0; width: auto; height: 16px; overflow: hidden; font-size: 90%; background: #FFF; margin: 5px }
 .pane-item:after, .tab-row:after, .tab-edit-box:after { content: ""; display: block; clear: both }
 .pane-item-title { float: left; width: 185px }
+.pane-items .pane-item-split { border-bottom: 2px solid #555 !important; font-size: 130%; margin: 15px 0 0; }
+.pane-item-split .pane-item-title { float: none; width: auto; margin-left: 30px; }
 .pane-item-f { margin-left: 190px }
 .pane-item-f.pane-item-w { margin-left: 0 }
 .ui-sortable-helper, .pane-item.pane-item-hidden .pane-item-title, .pane-item.pane-item-hidden .pane-item-f, .pane-item.pane-item-hidden .pane-item-helparea, .pane-page-hidden, .tab-hidden { opacity: 0.5!important }
 .pane-page-hidden .ui-sortable-helper, .pane-page-hidden .pane-item.pane-item-hidden .pane-item-title, .pane-page-hidden .pane-item.pane-item-hidden .pane-item-f, .pane-page-hidden .pane-item.pane-item-hidden .pane-item-helparea { opacity: 1!important }
 .pane-item-box-edit { position: absolute; display: none; bottom: 100%; left: 0; right: 0; padding: 2px }
-.pane-item-box-edit div, .tab-edit-box div, div.tab-item-drag { float: left; cursor: default; border: 1px solid transparent; width: 16px; height: 16px; background-position: 50% 50%; background-size: contain; background-repeat: no-repeat; border-radius: 2px; margin: 1px 5px 0 }
+.pane-item-box-edit div, .tab-edit-box div, .pane-item.pane-item-split .pane-item-drag { float: left; border: 1px solid transparent; width: 16px; height: 16px; background-position: 50% 50%; background-size: contain; background-repeat: no-repeat; border-radius: 2px; margin: 1px 5px 0 }
 .pane-item-box-edit div:hover, .tab-edit-box div:hover, div.tab-item-drag:hover { border-color: red }
 .pane-item-box-edit div img { width: 20px }
 .pane-item:hover .pane-item-box-edit, .pane-item.ui-sortable-helper .pane-item-box-edit { display: block }
+.pane-split { border: 1px dashed #555; margin: 0 0 10px; }
+.pane-split .pane-item-split { margin-left: 0 }
 .tab-edit-box div { margin: 1px 8px 0 0 }
 .tab-edit-box div:last-child { margin-right: 0 }
 .tab-edit-box .tab-item-drag, .pane-item .pane-item-drag { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA/FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ1dWlkOjY1RTYzOTA2ODZDRjExREJBNkUyRDg4N0NFQUNCNDA3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjMzMDExQzc0REI4MDExRTI4NzQwRDYwMzM5MTI3NkRGIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkE3REZBMDNFREI3RjExRTI4NzQwRDYwMzM5MTI3NkRGIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAoTWFjaW50b3NoKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM4ZWRmZThjLWZhZTMtNDQyMi1iOThkLTg1NjQyMmU4ZWQ5MiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowMjgwMTE3NDA3MjA2ODExODA4Mzg2RTU3M0Y3MUMzNiIvPiA8ZGM6dGl0bGU+IDxyZGY6QWx0PiA8cmRmOmxpIHhtbDpsYW5nPSJ4LWRlZmF1bHQiPmdseXBoaWNvbnM8L3JkZjpsaT4gPC9yZGY6QWx0PiA8L2RjOnRpdGxlPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pi2Q8kUAAACwSURBVHja5FbBDYAgDKTEQR3BUToCI7pBhQQMEMBCUz42afzQO+ydrUBEhhsAgOHpay52USDgpA8Xjsd07LoF8CmSVXA2yRc4DsBT4ggDuCJ7ganSDjh11iiH7VlxJZq1LUE7ehS9H5xxTZFztwgJChKOFVfTJQOhAvhrYXUX6bdoi8hbbJrPHwEB/mAW1bMl3Ly+fXqjmChamaoLZ8vKlC79Y+KLP32/79nflkeAAQBoPBTF7oQOFwAAAABJRU5ErkJggg==); cursor: move }

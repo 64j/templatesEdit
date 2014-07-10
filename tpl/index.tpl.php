@@ -1,3 +1,10 @@
+<div id="actions">
+	<ul class="actionButtons">
+		<li id="Button3"><a href="<?php echo $mod_page . '&action=view_json' ?>"><img src="media/style/<?php echo $theme; ?>/images/icons/save.png" alt="">&nbsp; Импорт / экспорт шаблона blank</a></li>
+		<li id="Button2"><a href="<?php echo $mod_page . '&action=set_default_templates' ?>" onClick="if(!confirm('Вы действительно хотите установить все шаблоны по шаблону blank?')){return false;}"><img src="media/style/<?php echo $theme; ?>/images/icons/information.png" alt="">&nbsp; Установить шаблоны по шаблону blank</a></li>
+		<li id="Button1"><a href="<?php echo $mod_page . '&action=uninstall' ?>" onClick="if(!confirm('Вы действительно хотите удалить модуль?')){return false;}"><img src="media/style/<?php echo $theme; ?>/images/icons/delete.png" alt="">&nbsp; Удалить модуль</a></li>
+	</ul>
+</div>
 <p>Описание работы модуля и плагина</p>
 <hr>
 <p>Модуль предназначен для изменения полей и вкладок на странице редактирования документа, а так же их порядок.<br>
@@ -11,7 +18,7 @@
 <p>При создании нового ТВ параметра он появляется на владке &quot;Общие&quot;, после создания его можно перенести на нужную вкладку в <strong>режиме редактирования шаблонов</strong> (читай ниже).</p>
 <p>При удалении ТВ параметра он так же удаляется из вывода шаблона документа.</p>
 <p>При создании нового шаблона, расположение его вкладок и полей берётся из шаблона <strong>blank</strong>, по этому желательно сразу после установки и подключения плагина, нужно зайти в любой документ с шаблоном blank и выставить желательное расположение полей которое будет использоваться в других шаблонах по умолчанию.<br>
-Если в документе с шаблоном blank нажать &quot;Сбросить шаблон по умолчанию&quot;, то расположение вернётся в первозданному виду.</p>
+	Если в документе с шаблоном blank нажать &quot;Сбросить шаблон по умолчанию&quot;, то расположение вернётся в первозданному виду.</p>
 <p>Если настроили вид шаблона <strong>blank</strong>, и лень во всех шаблонах делать одно и тоже, можно на странице модуля нажать <strong>Установить шаблоны по шаблону blank</strong> и тогда все шаблоны <span style="color: #F00">перезапишутся</span> по маске шаблона <strong>blank</strong>.</p>
 <h3>Установка модуля и плагина</h3>
 <p>Устанавливаете модуль с кодом</p>
@@ -36,7 +43,7 @@ include_once(MODX_BASE_PATH.'assets/modules/templatesEdit/module.templatesedit.p
 */<br>
 require_once MODX_BASE_PATH.&quot;assets/modules/templatesEdit/plugin/plugin.templatesedit.php&quot;;</pre>
 <p>Для включения <strong>режима редактирования шаблонов</strong>, в настройках плагина &quot;Редактировать шаблоны&quot; - <strong>true</strong>,<br>
-для использования альтернативного вывода шаблонов (на div-ах) &quot;Альтернативный вывод шаблона (div)&quot; - <strong>true</strong> </p>
+	для использования альтернативного вывода шаблонов (на div-ах) &quot;Альтернативный вывод шаблона (div)&quot; - <strong>true</strong> </p>
 <p>&nbsp;</p>
 <p>Далее нужно добавить событие <strong>OnDocFormTemplateRender</strong> в ядро MODX.</p>
 <p>В файле <strong>manager/actions/mutate_content.dynamic.php</strong> перед строчкой </p>
@@ -61,10 +68,3 @@ $j(&quot;#tv'.$tv['id'].'&quot;).parents(&quot;td&quot;).append(&quot;&lt;div cl
 <pre style="font: 100 13px/16px monospace; margin: 10px; padding: 10px; background: #fff;color: #000080;word-wrap: break-word;border: 1px solid #C5C5C5;">
 $j(&quot;#tv'.$tv['id'].'&quot;).parent().append(&quot;&lt;div class=\&quot;tvimage\&quot; id=\&quot;tv'.$tv['id'].'PreviewContainer\&quot;&gt;&lt;img src=\&quot;&quot;+url+&quot;\&quot; style=\&quot;&quot;+'.$style.'+&quot;\&quot; id=\&quot;tv'.$tv['id'].'Preview\&quot;/&gt;&lt;/div&gt;&quot;);</pre>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<div id="actions">
-	<ul class="actionButtons">
-		<li id="Button1"><a href="<?php echo $mod_page . '&action=set_default_templates' ?>" onClick="if(!confirm('Вы действительно хотите установить все шаблоны по шаблону blank?')){return false;}"><img src="media/style/<?php echo $theme; ?>/images/icons/information.png" alt="">&nbsp; Установить шаблоны по шаблону blank</a></li>
-		<li id="Button1"><a href="<?php echo $mod_page . '&action=uninstall' ?>" onClick="if(!confirm('Вы действительно хотите удалить модуль?')){return false;}"><img src="media/style/<?php echo $theme; ?>/images/icons/delete.png" alt="">&nbsp; Удалить модуль</a></li>
-	</ul>
-</div>

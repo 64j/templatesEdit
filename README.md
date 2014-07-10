@@ -1,5 +1,8 @@
 templatesEdit
 =============
+<h3>UPD: 10.07.2014</h3>
+<p>- добавленна возможность разделять поля на группы</p>
+<p>- на странице модуля теперь можно увидеть как выглядят данные шаблона, так же скопировать настройку шаблона "blank" и перенести на другой сайт, либо импортировать с другого сайта.</p>
 
 <h2>[EVO] templatesEdit — модуль и плагин для изменения вида документов в админ панели MODX</h2>
 
@@ -20,6 +23,7 @@ templatesEdit
 Если в документе с шаблоном blank нажать &quot;Сбросить шаблон по умолчанию&quot;, то расположение вернётся в первозданному виду.</p>
 <p>Если настроили вид шаблона <strong>blank</strong>, и лень во всех шаблонах делать одно и тоже, можно на странице модуля нажать <strong>Установить шаблоны по шаблону blank</strong> и тогда все шаблоны <span style="color: #F00">перезапишутся</span> по маске шаблона <strong>blank</strong>.</p>
 <br>
+<img src="http://wexar.ru/assets/images/templatesedit.image_4.png" alt="" width="240"><br>
 <img src="http://wexar.ru/assets/images/templatesedit_image_docs_1.png" alt="" width="240"><br>
 <img src="http://wexar.ru/assets/images/templatesedit_image_docs_2.png" alt="" width="240"><br>
 <img src="http://wexar.ru/assets/images/templatesedit_image_docs_3.png" alt="" width="240"><br>
