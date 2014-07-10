@@ -29,9 +29,9 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $v['title'] . '||||' . $v['description'],
+                        'title' => $v['title'] . ($v['description'] ? '||||'  .$v['description'] : ''),
                         'help' => '',
-                        'name' => $v['name'],
+                        'name' => 'tv' . $v['id'],
                         'roles' => '',
                         'hide' => ''
                     )
@@ -58,9 +58,9 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $v['title'] . '||||' . $v['description'],
+                        'title' => $v['title'] . ($v['description'] ? '||||'  .$v['description'] : ''),
                         'help' => '',
-                        'name' => $v['name'],
+                        'name' => 'tv' . $v['id'],
                         'roles' => '',
                         'hide' => ''
                     )
@@ -89,9 +89,9 @@ class templatesEdit {
             foreach ($rt as $v) {
                 $tv_arr['tv' . $v['id']] = array(
                     'tv' => array(
-                        'title' => $v['title'] . '||||' . $v['description'],
+                        'title' => $v['title'] . ($v['description'] ? '||||'  .$v['description'] : ''),
                         'help' => '',
-                        'name' => $v['name'],
+                        'name' => 'tv' . $v['id'],
                         'roles' => '',
                         'hide' => ''
                     )
@@ -114,9 +114,6 @@ class templatesEdit {
         if (!$default_data) {
             $data = json_decode($this->modx->db->getValue($this->modx->db->select('data', $this->tbl_tpl_settings, 'templateid=0')), true);
         } else {
-            foreach ($_lang as $k => $v) {
-                $_lang[$k] = $this->strClean($v);
-            }
             $data = array(
                 'General' => array(
                     'title' => $_lang['settings_general'],
@@ -160,7 +157,7 @@ class templatesEdit {
                         'link_attributes' => array(
                             'field' => array(
                                 'title' => $_lang['link_attributes'],
-                                'help' => $_lang['link_attributes_help'],
+                                'help' => $this->strClean($_lang['link_attributes_help']),
                                 'name' => 'link_attributes',
                                 'roles' => '',
                                 'hide' => ''
