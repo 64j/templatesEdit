@@ -3,6 +3,7 @@ window.j = jQuery.noConflict(true);
 var tplEdit = {
     pitems: '.pane-items',
     pitem: '.pane-item',
+    psplit: '.pane-split .pane-item-split',
     tabs: '.tab-row',
     tab: '.tab-row h2',
     pages: '.tab-pages',
@@ -19,13 +20,15 @@ var tplEdit = {
             j('#documentPane').before('<style>.dynamic-tab-pane-control .tab-row{background-position:0 100%;background-repeat:repeat-x;height: auto;margin-bottom: 2px;}.dynamic-tab-pane-control .tab-row .tab{height:auto;background-color: #EFF4F5 !important;padding: 3px 15px;}.dynamic-tab-pane-control .tab-row .tab.selected{height:auto;background-color: #E9F1F3 !important;}</style>');
         }
         /////////////////////////////////
-        j(_self.pitem).append(_self.boxItemEdit);
+        j(_self.pitem + ':not(.pane-item-split)').append(_self.boxItemEdit);
+        j(_self.page + ' .pane-item-split').prepend('<div class="pane-item-drag" title="Переместить"></div>');
         j(_self.tab + '[data-visibility=hidden]').addClass('tab-hidden');
         j(_self.page).each(function (i, el) {
             j(_self.tab).eq(i).attr('data-tabindex', '#' + j(el).attr('id'));
         });
         j(_self.tab).append(_self.boxTabEdit);
         j(_self.page).wrapAll('<div class="tab-pages">');
+        j(_self.page).prepend('<div class="pane-split">' + _self.splitItem.replace('%id%', _self.newID()) + '</div>');
         j('.pane-item-title .warning, .pane-item-title .comment, .pane-item-helparea, .tab-row h2.tab span:not(' + _self.tab + '[data-tabindex=#tabMeta] span,' + _self.tab + '[data-tabindex=#tabAccess] span)').attr('contenteditable', true);
         j(_self.tab + '[data-tabindex=#tabMeta] .tab-edit-box,' + _self.tab + '[data-tabindex=#tabAccess] .tab-edit-box').css('visibility', 'hidden');
         j('#actions .actionButtons li').remove();
@@ -45,6 +48,7 @@ var tplEdit = {
         _self.tabEdit();
         _self.itemHover();
     },
+    splitItem: '<div class="pane-item pane-item-split" data-item-name="split_%id%"><div class="pane-item-drag" title="Переместить"></div><div class="pane-item-title"><span class="warning" contenteditable="true">Новая группа</span></div></div>',
     boxTabEdit: '<div class="tab-edit-box"><div class="tab-item-drag" title="Переместить"></div><div class="tab-item-visibility" title="Изменить видимость"></div><div class="tab-item-add" title="Добавить вкладку"></div><div class="tab-item-delete" title="Удалить вкладку"></div></div>',
     boxItemEdit: '<div class="pane-item-box-edit"><div class="pane-item-drag" title="Переместить"></div><div class="pane-item-edittitle" title="Добавить / удалить название"></div><div class="pane-item-visibility" title="Изменить видимость"></div><div class="pane-item-edithelp" title="Добавить / удалить подсказку"></div><div class="pane-item-helparea" contenteditable="true"></div></div>',
     newTab: '<h2 class="tab selected" data-tabindex=""><span contenteditable="true">Новая вкладка</span></h2>',
@@ -102,6 +106,7 @@ var tplEdit = {
             }
             return false;
         });
+        _self.splitItems();
     },
     newID: function () {
         return new Date().getTime();
@@ -117,6 +122,7 @@ var tplEdit = {
         j(id).next().attr('id', 'tab' + uniqid);
         j(_self.tab + '[data-tabindex=#tab' + uniqid + ']').append(_self.boxTabEdit);
         j(_self.tab + '[data-tabindex=#tab' + uniqid + '] span').focus();
+        j('#tab' + uniqid + _self.page).prepend('<div class="pane-split">' + _self.splitItem.replace('%id%', _self.newID()) + '</div>');
         _self.tabEdit();
         _self.dropTabs();
     },
@@ -125,19 +131,6 @@ var tplEdit = {
         j(_self.pitem).find('.pane-item-box-edit div').unbind();
         j(_self.pitem).hover(function () {
             j('.pane-item-helparea', this).text(j('img#item-help-' + j(this).data('item-name'), this).attr('alt'));
-            if (j(this).index() == 0) {
-                j(this).closest(_self.page).css({
-                    zIndex: 1000
-                })
-            } else {
-                j(this).closest(_self.page).css({
-                    zIndex: 2
-                })
-            }
-        }, function () {
-            j(this).closest(_self.page).css({
-                zIndex: 2
-            })
         });
         j('.pane-item-visibility').click(function () {
             var _item = j(this).closest(_self.pitem);
@@ -196,23 +189,63 @@ var tplEdit = {
             }
         });
     },
-    sortItems: function (id) {
+    splitItems: function () {
+        var _self = this;
+        j('.pane-split').sortable({
+            start: function (event, ui) {
+                ui.helper.parent().height(ui.placeholder.outerHeight())
+            },
+            update: function (event, ui) {
+                j(this).append(_self.splitItem.replace('%id%', _self.newID()));
+            },
+            dropOnEmpty: false,
+            axis: 'y',
+            handle: '.pane-item-drag',
+            connectWith: _self.pitems,
+            zIndex: 999
+        });
+        j(_self.psplit).mousedown(function () {
+            j('.pane-split').sortable('enable');
+        });
+        j(_self.psplit).mouseup(function (e) {
+            setTimeout(function () {
+                j('.pane-split').sortable('destroy');
+                _self.splitItems();
+            }, 200);
+        });
+        j('.pane-split').droppable({
+            accept: _self.pitem,
+            hoverClass: 'ui-drop-hover',
+            drop: function (event, ui) {
+                ui.draggable.remove()
+            }
+        })
+    },
+    sortItems: function () {
         var _self = this;
         j(_self.pitems).sortable({
-            connectWith: _self.pitem,
             handle: '.pane-item-drag',
-            zIndex: 999
+            zIndex: 999,
+            start: function (event, ui) {
+                if (!ui.item.hasClass('pane-item-split')) {
+                    j(_self.psplit).parent().droppable('disable')
+                }
+            },
+            stop: function (event, ui) {
+                if (!ui.item.hasClass('pane-item-split')) {
+                    j(_self.psplit).parent().droppable('enable')
+                }
+            }
         });
     },
     sortTabs: function () {
         var _self = this;
         j(_self.tabs).sortable({
-            axis: "x",
+            axis: 'x',
             delay: 100,
             opacity: 0.7,
             handle: 'div.tab-item-drag',
             items: 'h2:not([data-tabindex=#tabMeta], [data-tabindex=#tabAccess])',
-            //		            revert: true,
             tolerance: 'pointer',
             cancel: 'span',
             update: function (event, ui) {
@@ -220,14 +253,8 @@ var tplEdit = {
                 j('h2', this).each(function (i, el) {
                     var id = j(el).data('tabindex');
                     if (j(el).hasClass('selected')) {
-                        j(el).css({
-                            zIndex: 999
-                        });
                         tmp_id = id;
                     } else {
-                        j(el).css({
-                            zIndex: 1
-                        });
                         var tmp = j(id).clone();
                         if (tmp_id) {
                             j(id + ':first').remove();
@@ -248,9 +275,9 @@ var tplEdit = {
     dropTabs: function () {
         var _self = this;
         j(_self.tab).droppable({
-            accept: _self.pitem,
-            tolerance: "pointer",
-            activeClass: "ui-drop-highlight",
+            accept: _self.pitem + ':not(.pane-item-split)',
+            tolerance: 'pointer',
+            activeClass: 'ui-drop-highlight',
             hoverClass: "ui-drop-hover",
             forcePlaceholderSize: true,
             drop: function (event, ui) {
@@ -280,6 +307,7 @@ var tplEdit = {
     setData: function () {
         var _self = this;
         var tsArr = {};
+        j('#preLoader').show();
         j(_self.tab).each(function (i, h) {
             var grpID = j(h).data('tabindex').replace('#tab', '');
             if (grpID == 'Access' || grpID == 'Meta') {
@@ -290,8 +318,17 @@ var tplEdit = {
                 tsArr[grpID]['title'] = _self.cleanText(j(h).text());
                 tsArr[grpID]['roles'] = '';
                 tsArr[grpID]['hide'] = j('#tab' + grpID).hasClass('pane-page-hidden') ? '1' : '0';
-                j(_self.pitem, j('#tab' + grpID)).each(function () {
-                    var field_type = this.hasClass('pane-item-field') ? 'field' : 'tv';
+                j(_self.pitem, j('#tab' + grpID + ' ' + _self.pitems)).each(function () {
+                    var field_type;
+                    if (this.hasClass('pane-item-field')) {
+                        field_type = 'field';
+                    } else if (this.hasClass('pane-item-tv')) {
+                        field_type = 'tv';
+                    } else if (this.hasClass('pane-item-split')) {
+                        field_type = 'split';
+                    } else {
+                        return
+                    }
                     var item_id = j(this).data('item-name');
                     var title = j(_self.warning, this).text();
                     if (j(_self.warning, this).text() != '') {
@@ -321,8 +358,7 @@ var tplEdit = {
                 templateid: _self.templateid,
                 data: _self.htmlentities(stringArr)
             },
-            success: function (data) {
-                alert(data);
+            success: function () {
                 location.reload();
             },
             error: function () {
@@ -334,6 +370,7 @@ var tplEdit = {
         var _self = this;
         var confirmTxt = 'Вы действительно хотите сбросить шаблон по умолчанию ?';
         if (confirm(confirmTxt)) {
+            j('#preLoader').show();
             j.ajax({
                 type: "POST",
                 cache: false,
