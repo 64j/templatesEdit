@@ -678,13 +678,13 @@ if ($e->name == 'OnTVFormSave') {
                 'data' => mysql_real_escape_string($data)
             ), $modx->getFullTableName('site_templates_settings'), "templateid=" . $v['templateid']);
         } else {
-            $tv = $modx->db->getRow($modx->db->select("name, caption AS title, description", $modx->getFullTableName('site_tmplvars'), "id=" . $id));
-            if (!$tplEdit->recursive_array_search($tv['name'], $data)) {
+            $tv = $modx->db->getRow($modx->db->select("name, caption, description", $modx->getFullTableName('site_tmplvars'), "id=" . $id));
+            if (!$tplEdit->recursive_array_search('tv' . $id, $data) && $id > 0) {
                 $tv_arr['tv' . $id]        = array(
                     'tv' => array(
-                        'title' => $tv['title'] . $tv['description'] ? '||||'  .$tv['description'] : '',
+                        'title' => $tv['caption'] . ($tv['description'] ? '||||'  .$tv['description'] : ''),
                         'help' => '',
-                        'name' => $tv['name'],
+                        'name' => 'tv' . $id,
                         'roles' => '',
                         'hide' => ''
                     )
