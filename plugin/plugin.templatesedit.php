@@ -700,6 +700,8 @@ if ($e->name == 'OnTVFormSave') {
 }
 
 if ($e->name == 'OnTVFormDelete') {
+	require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
+	$tplEdit = new templatesEdit($modx);
     $rs = $modx->db->makeArray($modx->db->select("data, templateid", $modx->getFullTableName('site_templates_settings')));
     foreach ($rs as $v) {
         $data = json_decode($v['data'], true);
