@@ -7,7 +7,7 @@
 	</ul>
 </div>
 <hr>
-<h3><strong style="color:red">Внимание</strong> — ручное редактирование может разрушить структуру данных.</h3>
+<h3><strong style="color:red">Внимание</strong> — ручное редактирование может разрушить структуру данных. Для работы с JSON массивом используйте сервис <a href="http://jsonviewer.stack.hu/" target="_blank">Online JSON Viewer</a></h3>
 <p></p>
 <p>
 <form action="<?php echo $mod_page . '&action=view_json&save_json=0' ?>" method="post" name="data">
