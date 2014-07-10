@@ -379,8 +379,7 @@ var tplEdit = {
                     templateid: _self.templateid,
                     reset: 'yes'
                 },
-                success: function (data) {
-                    alert(data);
+                success: function () {
                     location.reload();
                 },
                 error: function () {
