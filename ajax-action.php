@@ -29,13 +29,6 @@ if(isset($_POST['templateid']) && $_POST['data']) {
 	$templateid = $_POST['templateid'];
 	
 	$modx->db->update(array('data' => mysql_real_escape_string($data)), $modx->getFullTableName('site_templates_settings'), "templateid=" . $templateid);
-
-	if($templateid == 0) {
-		$templatename = 'blank';
-	} else {
-		$templatename = $modx->db->getValue($modx->db->select('templatename', $modx->getFullTableName('site_templates'), "id=" . $templateid));
-	}
-	echo 'Шаблон "' . $templatename .'" (' . $templateid . ') сохранён.';
 }
 
 if(isset($_POST['templateid']) && $_POST['reset'] == 'yes') {
