@@ -8,7 +8,6 @@ class templatesEdit {
         $this->tbl_tpl_settings = $modx->getFullTableName('site_templates_settings');
         $this->tbl_tv_tpl       = $modx->getFullTableName('site_tmplvar_templates');
         $this->tbl_tvs          = $modx->getFullTableName('site_tmplvars');
-        $this->tbl_eventnames   = $modx->getFullTableName('system_eventnames');
     }
     
     /**
