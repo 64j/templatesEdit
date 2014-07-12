@@ -41,6 +41,10 @@ templatesEdit
 */<br>
 include_once(MODX_BASE_PATH.'assets/modules/templatesEdit/module.templatesedit.php');</pre>
 <p>&nbsp;</p>
+<p>Перед установкой плагина проверяете наличие события "OnDocFormTemplateRender", если нет такого то выполняете SQL запрос</p>
+<pre style="font: 100 13px/16px monospace; margin: 10px; padding: 10px; background: #fff;color: #000080;word-wrap: break-word;border: 1px solid #C5C5C5;">
+INSERT INTO modx_system_eventnames VALUES (NULL, 'OnDocFormTemplateRender', '1', 'Documents');
+</pre>
 <p>Устанавливаете плагин <strong>templatesEdit </strong><br></p>
 <pre style="font: 100 13px/16px monospace; margin: 10px; padding: 10px; background: #fff;color: #000080;word-wrap: break-word;border: 1px solid #C5C5C5;">
 //&lt;?php
