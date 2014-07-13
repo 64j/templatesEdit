@@ -648,13 +648,20 @@ $loadJquery        = $loadJquery == 'true' ? true : false;
 
 
 if ($e->name == 'OnTempFormSave') {
-    if ($mode == 'new' || ($mode == 'upd' && $modx->db->getRecordCount($modx->db->select("id", $modx->getFullTableName('site_templates_settings'), "templateid=". $id)) == 0)) {
-        require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
-        $tplEdit = new templatesEdit($modx);
+	require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
+	$tplEdit = new templatesEdit($modx);
+    if ($mode == 'new') {
         $modx->db->insert(array(
             'data' => $tplEdit->setTemplateDefault(),
             'templateid' => $id
         ), $modx->getFullTableName('site_templates_settings'));
+    }
+    if($mode == 'upd' && $modx->db->getRecordCount($modx->db->select("id", $modx->getFullTableName('site_templates_settings'), "templateid=". $id)) == 0) {
+        $modx->db->insert(array(
+            'data' => '',
+            'templateid' => $id
+        ), $modx->getFullTableName('site_templates_settings'));		
+        $tplEdit->reloadTemplateDefault($id);
     }
 }
 
