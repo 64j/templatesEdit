@@ -648,7 +648,7 @@ $loadJquery        = $loadJquery == 'true' ? true : false;
 
 
 if ($e->name == 'OnTempFormSave') {
-    if ($mode == 'new' || $modx->db->getRecordCount($modx->db->select("id", $modx->getFullTableName('site_templates_settings'))) == 0) {
+    if ($mode == 'new' || ($mode == 'upd' && $modx->db->getRecordCount($modx->db->select("id", $modx->getFullTableName('site_templates_settings'), "templateid=". $id)) == 0)) {
         require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
         $tplEdit = new templatesEdit($modx);
         $modx->db->insert(array(
