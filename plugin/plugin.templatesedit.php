@@ -640,7 +640,7 @@ function renderContentField_edit($data, $editableTemplate) {
 // end Generate Fields
 
 
-global $modx, $content, $docgrp;
+global $modx, $content, $docgrp, $replace_richtexteditor;
 $e =& $modx->Event;
 $editableTemplate  = $editableTemplate == 'true' ? true : false;
 $altRenderTemplate = $altRenderTemplate == 'true' ? true : false;
