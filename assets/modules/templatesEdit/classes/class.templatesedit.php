@@ -359,7 +359,7 @@ class templatesEdit {
             $data['General']['fields'] = array_merge($data['General']['fields'], $tv_arr);
         }
         $data = $this->json_encode_cyr($data);
-        return mysql_real_escape_string($data);
+        return $this->modx->db->escape($data);
     }
     
     /* Чистим строку
@@ -387,7 +387,7 @@ class templatesEdit {
         global $sanitize_seed;
         $json = preg_replace('|\s+|', ' ', $json);
         $json = str_replace($sanitize_seed, '', $json);
-        $this->modx->db->query("UPDATE " . $this->tbl_tpl_settings . " SET data='" . mysql_real_escape_string($json) . "' WHERE templateid=" . $templateid);
+        $this->modx->db->query("UPDATE " . $this->tbl_tpl_settings . " SET data='" . $this->modx->db->escape($json) . "' WHERE templateid=" . $templateid);
     }
     
     /**
@@ -449,7 +449,7 @@ class templatesEdit {
      *
      */
     function checkInstall() {
-        if (mysql_num_rows(mysql_query("SHOW TABLES FROM " . $this->dbname . " LIKE '" . $this->tbl_settings . "'")) > 0) {
+        if ($this->modx->db->getRecordCount($this->modx->db->query("SHOW TABLES FROM " . $this->dbname . " LIKE '" . $this->tbl_settings . "'")) > 0) {
             return true;
         }
     }

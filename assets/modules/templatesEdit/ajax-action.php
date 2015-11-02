@@ -28,7 +28,7 @@ if(isset($_POST['templateid']) && $_POST['data']) {
 	$data = str_replace($sanitize_seed, '', $_POST['data']);
 	$templateid = $_POST['templateid'];
 	
-	$modx->db->update(array('data' => mysql_real_escape_string($data)), $modx->getFullTableName('site_templates_settings'), "templateid=" . $templateid);
+	$modx->db->update(array('data' => 	$modx->db->escape($data)), $modx->getFullTableName('site_templates_settings'), "templateid=" . $templateid);
 }
 
 if(isset($_POST['templateid']) && $_POST['reset'] == 'yes') {

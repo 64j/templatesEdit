@@ -682,7 +682,7 @@ if ($e->name == 'OnTVFormSave') {
             }
             $data = $tplEdit->json_encode_cyr($data);
             $modx->db->update(array(
-                'data' => mysql_real_escape_string($data)
+                'data' =>   $modx->db->escape($data)
             ), $modx->getFullTableName('site_templates_settings'), "templateid=" . $v['templateid']);
         } else {
             $tv = $modx->db->getRow($modx->db->select("name, caption, description", $modx->getFullTableName('site_tmplvars'), "id=" . $id));
@@ -699,7 +699,7 @@ if ($e->name == 'OnTVFormSave') {
                 $data['General']['fields'] = array_merge($data['General']['fields'], $tv_arr);
                 $data                      = $tplEdit->json_encode_cyr($data);
                 $modx->db->update(array(
-                    'data' => mysql_real_escape_string($data)
+                    'data' => $modx->db->escape($data)
                 ), $modx->getFullTableName('site_templates_settings'), "templateid=" . $v['templateid']);
             }
         }
@@ -717,7 +717,7 @@ if ($e->name == 'OnTVFormDelete') {
         }
         $data = $tplEdit->json_encode_cyr($data);
         $modx->db->update(array(
-            'data' => mysql_real_escape_string($data)
+            'data' => $modx->db->escape($data)
         ), $modx->getFullTableName('site_templates_settings'), "templateid=" . $v['templateid']);
     }
 }
