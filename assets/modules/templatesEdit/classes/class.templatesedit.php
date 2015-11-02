@@ -8,7 +8,6 @@ class templatesEdit {
         $this->tbl_tpl_settings = $modx->getFullTableName('site_templates_settings');
         $this->tbl_tv_tpl       = $modx->getFullTableName('site_tmplvar_templates');
         $this->tbl_tvs          = $modx->getFullTableName('site_tmplvars');
-        $this->tbl_eventnames   = $modx->getFullTableName('system_eventnames');
     }
     
     /**
@@ -19,7 +18,6 @@ class templatesEdit {
         $sql    = array();
         $sql[]  = "CREATE TABLE IF NOT EXISTS " . $this->tbl_tpl_settings . " (`id` INT(11) NOT NULL auto_increment, `templateid` INT(11), `data` MEDIUMTEXT NOT NULL, PRIMARY KEY (`id`));";
         $sql[]  = "INSERT INTO " . $this->tbl_tpl_settings . " VALUES (NULL, '0', '" . $this->setTemplateDefault('', true) . "');";
-        $sql[]  = "INSERT INTO " . $this->tbl_eventnames . " VALUES (NULL, 'OnDocFormTemplateRender', '1', 'Documents');";
         $result = $this->modx->db->makeArray($this->modx->db->query("SELECT id FROM " . $this->tbl_tpl . ""));
         foreach ($result as $tpl) {
             $rt     = $this->modx->db->makeArray($this->modx->db->select("tv.name, tv.caption AS title, tv.description, tv.id AS id, tr.templateid, tr.rank", "{$this->tbl_tv_tpl} AS tr

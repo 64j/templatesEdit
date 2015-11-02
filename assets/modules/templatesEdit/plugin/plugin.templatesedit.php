@@ -640,7 +640,7 @@ function renderContentField_edit($data, $editableTemplate) {
 // end Generate Fields
 
 
-global $modx, $content, $docgrp;
+global $modx, $content, $docgrp, $replace_richtexteditor;
 $e =& $modx->Event;
 $editableTemplate  = $editableTemplate == 'true' ? true : false;
 $altRenderTemplate = $altRenderTemplate == 'true' ? true : false;
@@ -648,13 +648,20 @@ $loadJquery        = $loadJquery == 'true' ? true : false;
 
 
 if ($e->name == 'OnTempFormSave') {
+	require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
+	$tplEdit = new templatesEdit($modx);
     if ($mode == 'new') {
-        require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
-        $tplEdit = new templatesEdit($modx);
         $modx->db->insert(array(
             'data' => $tplEdit->setTemplateDefault(),
             'templateid' => $id
         ), $modx->getFullTableName('site_templates_settings'));
+    }
+    if($mode == 'upd' && $modx->db->getRecordCount($modx->db->select("id", $modx->getFullTableName('site_templates_settings'), "templateid=". $id)) == 0) {
+        $modx->db->insert(array(
+            'data' => '',
+            'templateid' => $id
+        ), $modx->getFullTableName('site_templates_settings'));		
+        $tplEdit->reloadTemplateDefault($id);
     }
 }
 
@@ -682,7 +689,7 @@ if ($e->name == 'OnTVFormSave') {
             if (!$tplEdit->recursive_array_search('tv' . $id, $data) && $id > 0) {
                 $tv_arr['tv' . $id]        = array(
                     'tv' => array(
-                        'title' => $tv['caption'] . ($tv['description'] ? '||||'  .$tv['description'] : ''),
+                        'title' => $tv['caption'] . ($tv['description'] ? '||||' . $tv['description'] : ''),
                         'help' => '',
                         'name' => 'tv' . $id,
                         'roles' => '',
@@ -700,9 +707,9 @@ if ($e->name == 'OnTVFormSave') {
 }
 
 if ($e->name == 'OnTVFormDelete') {
-	require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
-	$tplEdit = new templatesEdit($modx);
-    $rs = $modx->db->makeArray($modx->db->select("data, templateid", $modx->getFullTableName('site_templates_settings')));
+    require_once MODX_BASE_PATH . "assets/modules/templatesEdit/classes/class.templatesedit.php";
+    $tplEdit = new templatesEdit($modx);
+    $rs      = $modx->db->makeArray($modx->db->select("data, templateid", $modx->getFullTableName('site_templates_settings')));
     foreach ($rs as $v) {
         $data = json_decode($v['data'], true);
         foreach ($data as $key => $val) {
